@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<color name="colorPrimary">#09f0f0</color>
+<color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#0e9adf</color>
+<color name="black">#FF000000</color>
+<color name="gray">#FF9D9D9D</color>
+<color name="red">#FFFF0000</color>
+<color name="blue">#FF03A9F4</color>
+<color name="white">#FFFFFFFF</color>
+    <color name="video_thumbnail_placeholder_color">#cccccc</color>
+    <color name="percent_50_black">#80000000</color>
+
+</resources>
+

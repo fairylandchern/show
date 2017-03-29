@@ -1,0 +1,208 @@
+package com.example.a22607.show.mainfragment;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.example.a22607.show.R;
+import com.example.a22607.show.mainfragment.homewidget.DensityUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by 22607 on 2017/2/25.
+ */
+
+public class HomeFragment extends Fragment {
+    private RelativeLayout toolsRe, backRe, overRe;
+    private ViewPager viewPager;
+    private View view1, view2;
+    private List<View> viewList;
+    private PagerAdapter pagerAdapter;
+    public static Handler mHandler;
+
+
+    private RecyclerView listView;
+    private LinearLayoutManager layoutManager;
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_home,container,false);
+        toolsRe = (RelativeLayout) view.findViewById(R.id.toolsre);
+        backRe = (RelativeLayout) view.findViewById(R.id.backre);
+        overRe = (RelativeLayout) view.findViewById(R.id.over_re);
+
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+
+        LayoutInflater lf = LayoutInflater.from(getContext());
+        view1 = lf.inflate(R.layout.layout1, null);
+        view2 = lf.inflate(R.layout.layout2, null);
+        viewList = new ArrayList<View>();
+        viewList.add(view1);
+        viewList.add(view2);
+
+
+        listView = (RecyclerView)view1. findViewById(R.id.list);
+        List<String> list = new ArrayList<String>();
+        for(int i = 0 ; i < 50 ; ++i){
+            list.add("我的信息列表"+i);
+        }
+        listView.setAdapter(new StringAdapter(list));
+        layoutManager = new LinearLayoutManager(getContext());
+        listView.setLayoutManager(layoutManager);
+
+
+
+
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                float alpha = ((float) msg.what) / 100f;
+                overRe.setAlpha(alpha);
+
+                if (msg.what == 0) {
+                    backRe.setVisibility(View.INVISIBLE);
+                    toolsRe.setVisibility(View.VISIBLE);
+                } else {
+                    backRe.setVisibility(View.VISIBLE);
+                    toolsRe.setVisibility(View.INVISIBLE);
+
+                }
+
+
+            }
+        };
+
+
+        pagerAdapter = new PagerAdapter() {
+
+            @Override
+            public boolean isViewFromObject(View arg0, Object arg1) {
+
+                return arg0 == arg1;
+            }
+
+            @Override
+            public int getCount() {
+
+                return viewList.size();
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position,
+                                    Object object) {
+                container.removeView(viewList.get(position));
+
+            }
+
+            @Override
+            public int getItemPosition(Object object) {
+
+                return super.getItemPosition(object);
+            }
+
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                container.addView(viewList.get(position));
+
+                return viewList.get(position);
+            }
+
+        };
+
+        viewPager.setAdapter(pagerAdapter);
+        backRe.setPadding(0, 0, 0, DensityUtil.getZhuangtai(getContext()));
+
+
+        final Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
+        CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+
+        collapsingToolbar.setBackgroundResource(R.drawable.cheese_2);
+        return view;
+    }
+
+    public void dodo(View v) {
+
+
+        viewPager.setCurrentItem(0);
+
+
+    }
+
+    public void dodo1(View v) {
+
+
+        viewPager.setCurrentItem(1);
+
+    }
+
+    class StringAdapter extends RecyclerView.Adapter<ViewHolder>{
+
+
+        private List<String> list ;
+        private LayoutInflater inflater;
+        StringAdapter( List<String> list ){
+            this.list = list ;
+            inflater = LayoutInflater.from(getContext());
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position, List<Object> payloads) {
+            super.onBindViewHolder(holder, position, payloads);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return super.getItemId(position);
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = inflater.inflate(R.layout.item,null,false);
+
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            holder.tv.setText(list.get(position));
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder{
+        private TextView tv ;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            tv = (TextView)itemView.findViewById(R.id.tv);
+        }
+    }
+
+}

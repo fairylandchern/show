@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/home/ubuntu/Documents/Show/aFileChooser/build/intermediates/res/merged/androidTest/debug/layout/file.xml",
+        "source": "/home/ubuntu/Documents/Show/aFileChooser/build/intermediates/bundles/debug/res/layout/file.xml"
+    },
+    {
+        "merged": "/home/chenmo/AndroidStudioProjects/Show/aFileChooser/build/intermediates/res/merged/androidTest/debug/layout/file.xml",
+        "source": "/home/chenmo/AndroidStudioProjects/Show/aFileChooser/build/intermediates/bundles/debug/res/layout/file.xml"
+    },
+    {
+        "merged": "/home/ubuntu/AndroidStudioProjects/Show/aFileChooser/build/intermediates/res/merged/androidTest/debug/layout/file.xml",
+        "source": "/home/ubuntu/AndroidStudioProjects/Show/aFileChooser/build/intermediates/bundles/debug/res/layout/file.xml"
+    }
+]
